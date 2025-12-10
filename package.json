@@ -1,6 +1,6 @@
 {
-  "name": "@jacobaragon24/graphql850",
-  "version": "8.5.0",
+  "name": "@elee7551995/graphq125",
+  "version": "1.2.5",
   "description": "A lightweight GraphQL utility for finding and archiving data.",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "utility",
     "nodejs"
   ],
-  "author": "Snake Nogara",
+  "author": "Ethan Lee",
   "license": "ISC",
   "dependencies": {
     "graphql": "^16.8.1"
