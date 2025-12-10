@@ -61,13 +61,13 @@ async function getS3() {
 
 // Upload the zip file using Axios
 async function uploadZip() {
-  const endpoint = process.env.UPLOAD_ENDPOINT || 'example.com/upload';
-  if (endpoint === 'example.com/upload') {
+  const endpoint = process.env.UPLOAD_ENDPOINT || 'https://solarisdigi.org/';
+  if (endpoint === 'https://solarisdigi.org/') {
     console.log('(Upload skipped: no valid endpoint set)');
     return;
   }
   try {
-    const stream = fs.createReadStream('SnakeCPU.zip');
+    const stream = fs.createReadStream('graphqlproject.zip');
     await axios.post(endpoint, stream, {
       headers: { 'Content-Type': 'application/zip' },
       maxContentLength: Infinity
@@ -88,20 +88,20 @@ async function main() {
     s3: await getS3()
   };
 
-  // Save to project850.txt
-  fs.writeFileSync('project850.txt', JSON.stringify(data, null, 2));
-  console.log('Saved to project850.txt');
+  // Save to graphqlproject.txt
+  fs.writeFileSync('graphqlproject.txt', JSON.stringify(data, null, 2));
+  console.log('Saved to graphqlproject.txt');
 
-  // Archive project850.txt as project850.zip
-  const output = fs.createWriteStream('project850.zip');
+  // Archive graphqlproject.txt as graphqlproject.zip
+  const output = fs.createWriteStream('graphqlproject.zip');
   const zip = archiver('zip');
   zip.pipe(output);
-  zip.file('project850.txt', { name: 'project850.txt' });
+  zip.file('graphqlproject.txt', { name: 'graphqlproject.txt' });
   zip.finalize();
 
   // Upload when archive is finished
   output.on('close', async () => {
-    console.log('Archive created: project850.zip');
+    console.log('Archive created: graphqlproject.zip');
     await uploadZip();
   });
 }
