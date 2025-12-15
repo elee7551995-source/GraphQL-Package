@@ -1,45 +1,19 @@
 # This workflow runs tests using Node.js and publishes a package to GitHub Packages when a release is created
 # For details, see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: CI & Publish
+nname: Publish to GitHub Packages
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
   release:
     types: [published]
   workflow_dispatch:
 
 jobs:
-  test:
-    name: Test on ${{ matrix.os }} / Node ${{ matrix.node-version }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        node-version: [16.x, 18.x, 20.x]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          # Removed cache since it requires a lock file
-
-      - name: Install dependencies
-        run: npm install   # switched from npm ci
-
-      - name: Run tests
-        run: npm test
-
   publish:
-    name: Publish to GitHub Packages (on release)
-    needs: test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,14 +26,15 @@ jobs:
           scope: '@elee7551995-source'
 
       - name: Install dependencies
-        run: npm install   # switched from npm ci
+        run: npm install
 
-      - name: Build (if defined)
-        run: npm run build --if-present
+      - name: Run tests
+        run: npm test
 
-      - name: Authenticate to GitHub Packages
-        run: |
-          npm config set //npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}
+      - name: Publish package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish package
         env:
