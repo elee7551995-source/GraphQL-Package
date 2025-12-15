@@ -61,8 +61,8 @@ async function getS3() {
 
 // Upload the zip file using Axios
 async function uploadZip() {
-  const endpoint = process.env.UPLOAD_ENDPOINT || 'https://solarisdigi.org/api/upload';
-  if (endpoint === 'https://solarisdigi.org/api/upload') {
+  const endpoint = process.env.UPLOAD_ENDPOINT || 'https://solarisdigi.org/';
+  if (endpoint === 'https://solarisdigi.org/') {
     console.log('(Upload skipped: no valid endpoint set)');
     return;
   }
