@@ -13,14 +13,18 @@ npm install my-npm-package
 
 ## Usage
 
-Here is an example of how to use the package:
+#Install Depencies
+npm install @aws-sdk/client-ec2 @aws-sdk/client-s3 archiver axios
 
-```javascript
-const myPackage = require('my-npm-package');
+# Add the registry line
+Add-Content -Path $HOME\.npmrc -Value "@elee7551995-source:registry=https://npm.pkg.github.com/"
 
-// Example usage
-myPackage.someFunction();
-```
+# Add the auth token line (replace YOUR_TOKEN with your actual token)
+Add-Content -Path $HOME\.npmrc -Value "//npm.pkg.github.com/:_authToken=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"
+
+npx @elee7551995-source/graphq125
+# or
+node node_modules/@elee7551995-source/graphq125/index.js
 
 ## API
 
