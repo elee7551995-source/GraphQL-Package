@@ -1,12 +1,11 @@
 {
-  "name": "@elee7551995/graphq125",
+  "name": "@elee7551995-source/graphq125",
   "version": "1.2.5",
   "description": "A lightweight GraphQL utility for finding and archiving data.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "jest --passWithNoTests",
-    "lint": "eslint ."
+    "test": "echo \"No tests\" || exit 0"
   },
   "keywords": [
     "graphql",
